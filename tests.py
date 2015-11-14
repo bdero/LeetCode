@@ -1,9 +1,19 @@
 import unittest
-from two_sum import Solution
+from problems import two_sum
 
-class two_sum(unittest.TestCase):
+
+class GenericSolutionTest(unittest.TestCase):
     def setUp(self):
-        self.solution = Solution()
+        if not hasattr(self, 'module'):
+            raise AttributeError(
+                'The `module` property must be defined in all subclasses of '
+                'GenericSolutionTest'
+            )
+        self.solution = self.module.Solution()
+
+
+class TwoSum(GenericSolutionTest):
+    module = two_sum
 
     def test_something(self):
         self.assertTupleEqual(

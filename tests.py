@@ -1,5 +1,5 @@
 import unittest
-from problems import two_sum, three_sum
+from problems import two_sum, three_sum, add_two_numbers
 
 
 class GenericSolutionTest(unittest.TestCase):
@@ -37,6 +37,26 @@ class ThreeSum(GenericSolutionTest):
             self.solution.threeSum([-1, 0, 1, 2, -1, -4]),
             [(-1, -1, 2), (-1, 0, 1)]
         )
+
+
+class AddTwoNumbers(GenericSolutionTest):
+    module = add_two_numbers
+
+    def setUp(self):
+        super(AddTwoNumbers, self).setUp()
+        self.ListNode = self.solution.ListNode
+
+    def test_carry(self):
+        l1 = self.ListNode(1)
+        l1.next = self.ListNode(2)
+        l1.next.next = self.ListNode(3)
+        l2 = self.ListNode(1)
+        l2.next = self.ListNode(9)
+        l2.next.next = self.ListNode(2)
+
+        result = self.solution.addTwoNumbers(l1, l2)
+
+        self.assertListEqual(list(result), [2, 1, 6])
 
 
 if __name__ == '__main__':
